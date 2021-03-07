@@ -1,0 +1,1 @@
+dotnet run --project ./Services/DKT.AdminService/DKT.AdminService.csproj

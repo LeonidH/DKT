@@ -1,0 +1,19 @@
+﻿using DKT.Core.Admin.BusinessObjects;
+using DKT.Data.EntityFramework.Admin.Mapping;
+using Microsoft.EntityFrameworkCore;
+
+namespace DKT.Data.EntityFramework
+{
+    public class AdminDbContext : DbContext
+    {
+        public DbSet<Account> Accounts { get; set; }
+
+        public AdminDbContext(DbContextOptions<AdminDbContext> options) : base(options)
+        {}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AccountConfiguration());
+        }
+    }
+}
