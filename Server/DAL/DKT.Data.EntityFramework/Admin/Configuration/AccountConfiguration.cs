@@ -9,7 +9,7 @@ namespace DKT.Data.EntityFramework.Admin.Mapping
         public void Configure(EntityTypeBuilder<Account> builder)
         {
             builder.ToTable("Accounts", "Admin")
-                .HasKey(a => a.Id);
+                .HasKey(a => a.AccountId);
             builder.HasIndex(a => a.Username).IsUnique();
             builder.Property(a => a.Username).IsRequired().HasMaxLength(100);
             builder.Property(a => a.FirstName).IsRequired().HasMaxLength(50);
@@ -18,6 +18,8 @@ namespace DKT.Data.EntityFramework.Admin.Mapping
             builder.Property(a => a.PasswordSalt).IsRequired().HasMaxLength(100);
             builder.Property(a => a.Email).IsRequired().HasMaxLength(50);
             builder.Property(a => a.Created).IsRequired();
+
+            builder.HasMany(a => a.Roles).WithMany(r => r.Accounts);
         }
     }
 }

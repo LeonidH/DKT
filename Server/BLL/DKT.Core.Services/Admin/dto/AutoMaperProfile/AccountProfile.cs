@@ -7,7 +7,9 @@ namespace DKT.Core.Services.Admin.dto.AutoMaperProfile
     {
         public AccountProfile()
         {
-            CreateMap<AccountDTO, Account>().ReverseMap();
+            CreateMap<AccountDTO, Account>()
+                .ForMember(a => a.Roles, opt => opt.MapFrom(x => x.Roles))
+                .ReverseMap();
         }
     }
 }

@@ -3,6 +3,7 @@ using DKT.Admin.Helpers;
 using DKT.Core.Admin.BusinessObjects;
 using DKT.Core.Services.Admin.dto;
 using DKT.Data.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace DKT.Core.Services.Admin
             _adminDbContext = adminDbContext;
             _mapper = mapper;
         }
-        public AccountDTO GetAccountByUsername(string username) => _mapper.Map<AccountDTO>(_adminDbContext.Accounts.FirstOrDefault(a => a.Username == username));
+        public async Task<AccountDTO> GetAccountByUsernameAsync(string username) => _mapper.Map<AccountDTO>(await _adminDbContext.Accounts.FirstOrDefaultAsync(a => a.Username == username));
 
         public async Task<AccountDTO> CreateAccountAsync(AccountDTO dto, string password)
         {
