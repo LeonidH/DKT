@@ -16,7 +16,7 @@ namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ApiController
+    public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
         private readonly IMapper _mapper;
@@ -40,8 +40,6 @@ namespace Server.Controllers
             var passwordHash = HashingHelper.GeneratePasswordHash(request.Password, account.PasswordSalt);
 
             if (account.PasswordHash != passwordHash) return null;
-            
-            if(true) return 
 
             return Ok(new LoginResponse()
             {
